@@ -6,25 +6,32 @@ import pathlib
 import logging
 
 from pyrogram import Client, filters
-from pyromod import listen
 from datetime import datetime
 from functools import partial
-from Python_ARQ import ARQ
-from configparser import ConfigParser
 from logging.handlers import TimedRotatingFileHandler
-from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
+
+
+
 
 
 # StartTime
 StartTime = datetime.now()
 
-# Pyrogram Clients
 
+API_ID = config.API_ID
+API_HASH = config.API_HASH
+BOT_TOKEN = config.BOT_TOKEN
+STRING_SESSION = config.STRING
+OWNER_ID = config.OWNER_ID
+DB_URI = config.MONGO_DB_URI
+
+
+# bot Client
 XlBot = Client(
         "MyAssistant",
         api_id=API_ID,
         api_hash= API_HASH,
-        bot_token=TOKEN,
+        bot_token=BOT_TOKEN,
         sleep_threshold=180,
     )
 XlBot.start() 
@@ -43,7 +50,7 @@ logging.basicConfig(
     level=logging.WARNING,
     handlers=[
         TimedRotatingFileHandler(
-            "logs/DaisyX.log",
+            "logs/XLBots.log",
             when="midnight",
             encoding=None,
             delay=False,
@@ -65,7 +72,7 @@ class Userbot(Client):
             SESSION,# if SESSION is not None else name,
             api_id=API_ID,
             api_hash=API_HASH,
-            plugins=dict(root=f"XlBots/plugins"),
+            plugins=dict(root=f"XLBots/plugins"),
             workdir="./",
             app_version="XL.0.1",
         )
@@ -84,7 +91,7 @@ class Userbot(Client):
 CMD_HELP = {}
 client = None
 name = "X-Userbot"
-ElricX = SkemX(__version__)
+Userbot = Userbot(__version__)
 
 # Some Requirements
 os.system("pip install --upgrade pip") 
