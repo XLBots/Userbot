@@ -1,0 +1,5 @@
+pyrogram
+asyncio
+uvloop
+yt-dlp
+youtube-search
