@@ -1,7 +1,8 @@
 import time
 from datetime import datetime
 from pyrogram import filters
-from ...import User, command
+from ...import Userbot
+from ..import Userbot command
 
 
 @User.on_message(command("ping") & filters.me) 
