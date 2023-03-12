@@ -9,13 +9,14 @@ from pyrogram import Client, filters
 from datetime import datetime
 from functools import partial
 from logging.handlers import TimedRotatingFileHandler
-
+from XLBots.mongo import db
 
 
 
 
 # StartTime
 StartTime = datetime.now()
+aiosession = ClientSession()
 
 
 API_ID = config.API_ID
@@ -24,6 +25,37 @@ BOT_TOKEN = config.BOT_TOKEN
 STRING_SESSION = config.STRING
 OWNER_ID = config.OWNER_ID
 DB_URI = config.MONGO_DB_URI
+SUDO_USER = config.SUDO_USERS
+SUDO_USERS.append(OWNER_ID) 
+
+if API_ID:
+   API_ID = config.API_ID
+else:
+   print("[INFO]: API_ID not found using default API_ID")
+   API_ID = "6435225"
+
+if API_HASH:
+   API_HASH = config.API_HASH
+else:
+   print("[INFO]: API_HASH not found using default API_HASH")
+   API_HASH = "4e984ea35f854762dcde906dce426c2d"
+
+if BOT_TOKEN:
+   TOKEN = config.BOT_TOKEN
+else:
+   print("[EXIT]: BOT_TOKEN missing! Exiting.. ") 
+   sys.exit() 
+
+if STRING_SESSION:
+   STRING = config.STRING_SESSION
+else:
+   print("[EXIT]: STRING_SESSION missing! Exiting.. ") 
+   sys.exit() 
+
+
+
+
+
 
 
 # bot Client
@@ -72,7 +104,7 @@ class Userbot(Client):
             SESSION,# if SESSION is not None else name,
             api_id=API_ID,
             api_hash=API_HASH,
-            plugins=dict(root=f"XLBots/plugins"),
+            plugins=dict(root="XLBots/plugins"),
             workdir="./",
             app_version="XL.0.1",
         )
@@ -86,6 +118,7 @@ class Userbot(Client):
     async def stop(self, *args):
         await super().stop()
         print("Xl-Userbot Stopped GoodBye.")
+
 
 # Global Variables
 CMD_HELP = {}
