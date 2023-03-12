@@ -2,6 +2,7 @@
 
 import os
 import sys
+import config
 import pathlib
 import logging
 
